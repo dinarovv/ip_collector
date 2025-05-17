@@ -1,3 +1,14 @@
+import subprocess
+import sys
+
+
+def clear_terminal():
+    input('Enter any key to continue..')
+    if sys.platform == 'win32':
+        subprocess.run('cls', shell=True)
+    else:
+        subprocess.run('clear', shell=True)
+
 def choice():
     key = input(f'''\
 Enter:
@@ -15,6 +26,7 @@ def ready_choice():
             return choice()
         except ValueError as _ex:
             print(_ex)
+            clear_terminal()
 
 def enter_txt_name() -> str:
     name = input('Enter your name of your txt file would you like to read.\nType = file.txt: ')
@@ -28,6 +40,7 @@ def enter_with_ex() -> str:
             return enter_txt_name()
         except ValueError as _ex:
             print(_ex)
+            clear_terminal()
 
 def read_txt(obj, name):
     while True:
@@ -37,6 +50,7 @@ def read_txt(obj, name):
             return
         except ValueError as _ex:
             print(_ex)
+            clear_terminal()
 
 def make_csv(maker):
     csv_name = input('Enter your name of your cvs file would you like to make.\nType = my_table: ')
@@ -46,6 +60,3 @@ def make_csv(maker):
         print(f'{csv_name}.csv has been write successfully!')
     except:
         print('ERROR: something went`s wrong')
-
-
-

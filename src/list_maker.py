@@ -1,4 +1,5 @@
 import csv
+
 from .ip_info import get_ip_info
 
 
@@ -22,11 +23,16 @@ class IPList:
 
     def list_processing(self):
         for ip in self.ip_list:
-            country, city, isp, lat_lon = get_ip_info(ip)[1:]
-            self.countries.append(country)
-            self.cities.append(city)
-            self.isps.append(isp)
-            self.lat_lons.append(lat_lon)
+            try:
+                if all(num for num in ip.split('.') if 0 <= int(num) <= 255):
+                    country, city, isp, lat_lon = get_ip_info(ip)[1:]
+                    self.countries.append(country)
+                    self.cities.append(city)
+                    self.isps.append(isp)
+                    self.lat_lons.append(lat_lon)
+                else: continue
+            except ValueError:
+                continue
 
     def append_csv(self, csv_name):
         with open(f'./csv/{csv_name}.csv', 'a', newline='', encoding='utf-8-sig') as file:
