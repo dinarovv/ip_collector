@@ -11,6 +11,13 @@ class IPList:
         self.isps = []
         self.lat_lons = []
 
+    def clear_lists(self):
+        self.ip_list = []
+        self.countries = []
+        self.cities = []
+        self.isps = []
+        self.lat_lons = []
+
     def get_ips(self, txt):
         try:
             file = open(txt)
@@ -19,7 +26,6 @@ class IPList:
             self.ip_list += ips
         except FileNotFoundError as _ex:
             print(f'Error: {_ex}')
-
 
     def list_processing(self):
         for ip in self.ip_list:
